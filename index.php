@@ -1,3 +1,15 @@
+<?php
+if(isset($_POST['submit'])){
+	
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$dob = $_POST['dob'];
+	$about = $_POST['about'];
+	$success_message = true;
+}
+
+
+?>
 <!Doctype HTML>
 <html>
 <head>
@@ -26,25 +38,34 @@ input{
 <body>
 <div class="container">
 	<div class="row">
+		<?php 
+		if(isset($success_message)){
+		?>
+		<div class="col-md-12 form_sub">
+			<h2>Your details are successfully submitted.</h2>
+			<h6>Name : <?php echo $name; ?></h6>
+			<h6>Email : <?php echo $email; ?></h6>
+			<h6>DOB : <?php echo $dob; ?></h6>
+			<h6>About : <?php echo $about; ?></h6>
+		</div>
+		<?php
+		}else{
+		?>
 		<div class="col-md-12 form">
 			<center>Fill The Form in 3 Minutes <div id="clock">03:00</div></center>
 		</div>
 		<div class="col-md-12 form">
-			<form action="" method="post" id="my-form" >
+			<form action="index.php" method="post" id="my-form" >
 				<input type="text" name="name" id="name" placeholder="Your Name" class="form-control" required>
-				<input type="email" name="email" id="email" placeholder="Your Name" class="form-control" required>
-				<input type="date" name="dob" id="dob" placeholder="Your Name" class="form-control" required>
+				<input type="email" name="email" id="email" placeholder="Your Email" class="form-control" required>
+				<input type="date" name="dob" id="dob" placeholder="Your Date of Birth" class="form-control" required>
 				<input type="text" name="about" id="about" placeholder="About Yourself" class="form-control" required>
-				<input type="button" name="submit" id="submit" value="Submit" class="btn btn-info" onclick="complete()">
+				<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info" >
 			</form>
 		</div>
-		<div class="col-md-12 form_sub hidden">
-			<h2>Your details are successfully submitted.</h2>
-			<h6>Name : <span id="a_name"></span></h6>
-			<h6>Email : <span id="a_email"></span></h6>
-			<h6>DOB : <span id="a_dob"></span></h6>
-			<h6>About : <span id="a_about"></span></h6>
-		</div>
+		<?php
+		}
+		?>
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -73,21 +94,6 @@ function countdown(element, minutes, seconds) {
 }
 countdown('clock', 0, 180);
 
-function complete(){
-	$('.form').addClass('hidden');
-	$('.form_sub').removeClass('hidden');
-
-	var name = $('#name').val();
-	var email = $('#email').val();
-	var dob = $('#dob').val();
-	var about = $('#about').val();
-	
-	$('#a_name').text(name);
-	$('#a_email').text(email);
-	$('#a_dob').text(dob);
-	$('#a_about').text(about);
-	return false;
-}
 </script>
 </body>
 </html>
